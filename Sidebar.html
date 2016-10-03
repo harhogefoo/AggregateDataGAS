@@ -1,0 +1,13 @@
+<!-- 最初にスタイルシートを読み込む --> 
+<?!= HtmlService.createHtmlOutputFromFile('Stylesheet').getContent(); ?>
+
+<div class="sidebar branding-below">
+  <div class="block" id="sidebar-button-bar">
+    <button id="aggregate-data">読み込み開始</button>
+  </div>
+  <div id="sidebar-info"></div>
+  <div id="sidebar-status"></div>
+</div>
+
+<!-- 最後にJavaScriptを読み込む -->
+<?!= HtmlService.createHtmlOutputFromFile('SidebarJS').getContent(); ?>

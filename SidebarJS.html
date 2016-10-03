@@ -1,0 +1,51 @@
+<!-- jQueryをロード -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+  $(function() {
+    $('#aggregate-data').click(onAggregateDataClick);
+  });
+
+  function onAggregateDataClick() {
+    this.disabled = true;
+
+    google.script.run
+        .withSuccessHandler(
+          function(msg, element) {
+            showStatus(msg);
+            element.disabled = false;
+          })
+        .withFailureHandler(
+          function(msg, element) {
+            showStatus(msg, 'error');
+            element.disabled = false;
+          })
+        .withUserObject(this)
+        .aggregateData();
+  }
+
+  function showStatus(msg, classId) {
+    $('#sidebar-status').removeClass().html(msg);
+    if (classId) {
+      $('#sidebar-status').addClass(classId);
+    }
+  }
+  
+  function showList(list) {  
+    if (Array.isArray(list)) {
+      var output = "<table>";
+      for (var i=0; i<list.length; i++) {
+        output += "<tr>";
+        for (var j in list[i]) {
+          output += "<td>" + list[i][j] + "</td>";
+        }
+        output += "</tr>";
+      }
+      output += "</table>";
+    } else {
+      var output = "Not Array!¥n" + JSON.stringify(list);
+    }
+    $('#sidebar-info').html(output);
+  }
+
+</script>
