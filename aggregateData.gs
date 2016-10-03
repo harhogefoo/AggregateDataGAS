@@ -9,7 +9,7 @@ function showSidebar() {
 
 // スプレッドシートを開いたときに呼ばれる
 function onOpen() {
- showSidebar(); 
+ showSidebar();
 }
 
 // 集計対象フォルダ以下のファイルを集計
@@ -19,15 +19,15 @@ function aggregateData() {
   var files = targetFolder.getFiles();
   Logger.log(files);
 
-  var outputSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(cfg['書き込み先シート']);  
+  var outputSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(cfg['書き込み先シート']);
   if (! outputSheet) {
-    var sheetName = cfg['書き込み先シート'] + '';
+    var sheetName = String(cfg['書き込み先シート']);
     Logger.log(sheetName);
     outputSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet(sheetName);
   }
   outputSheet.clear();
 
-  var curRow = 1;  
+  var curRow = 1;
   var fileList = [];
   while(files.hasNext()){
     var file = files.next();
